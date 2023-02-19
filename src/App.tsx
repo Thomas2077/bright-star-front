@@ -1,8 +1,8 @@
+import CommonItemBar  from "./components/CommonItemBar";
 
-
-const App: React.FC = () =>(
+const App = () =>(
     <div>
-        111
+      <CommonItemBar itemList={[{id:1, visible:true, name: "page1"},]}></CommonItemBar>
     </div>
 )
 
