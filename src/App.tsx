@@ -1,8 +1,9 @@
 import CommonItemBar  from "./components/CommonItemBar";
+import WorkerSearch from "./components/Worker/WorkerSearch";
 
 const App = () =>(
     <div>
-      <CommonItemBar itemList={[{id:1, visible:true, name: "page1"},]}></CommonItemBar>
+      <WorkerSearch/>
     </div>
 )
 

@@ -1,7 +1,7 @@
-import { StyleLay } from "./style";
 import React from "react";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import { Breadcrumb, Layout, Menu } from "antd";
+import { StyleLay } from "./style";
 
 export interface CommonItem {
   id: number,
