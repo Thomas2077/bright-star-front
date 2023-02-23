@@ -1,7 +1,12 @@
-import { StyleLay } from "./style";
 import React from "react";
 import { Content, Footer, Header } from "antd/es/layout/layout";
-import { Breadcrumb, Layout, Menu } from "antd";
+import { Layout, Menu } from "antd";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+
+
+`;
 
 export interface CommonItem {
   id: number,
@@ -18,7 +23,7 @@ const CommonItemBar = ({ itemList }: CommonItemList) => {
   // const user = useRecoilState()
 
   return (
-    <StyleLay>
+    <Wrapper>
       <Layout className="layout">
         <Header>
           <div className="loginTime">
@@ -40,7 +45,8 @@ const CommonItemBar = ({ itemList }: CommonItemList) => {
                 keyPath: item.id
               };
             })}
-            onClick={({ item, key, keyPath, domEvent })=>{}}
+            onClick={({ item, key, keyPath, domEvent }) => {
+            }}
           />
         </Header>
         <Content className="content">
@@ -48,7 +54,7 @@ const CommonItemBar = ({ itemList }: CommonItemList) => {
         </Content>
         <Footer className="footer">Ant Design ©2023</Footer>
       </Layout>
-    </StyleLay>
+    </Wrapper>
   );
 };
 
