@@ -2,7 +2,6 @@
 import React from "react";
 import { Form, Input, Table } from "antd";
 import styled from "styled-components";
-import FormItem from "antd/es/form/FormItem";
 
 
 const Wrapper = styled.div`

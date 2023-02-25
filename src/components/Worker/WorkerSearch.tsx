@@ -3,6 +3,9 @@ import { Button, Col, Form, Input, Radio, Row, Select, Table } from "antd";
 import styled from "styled-components";
 import FormItem from "antd/es/form/FormItem";
 
+import request from "../../utils/request";
+import { useLoaderData } from "react-router-dom";
+
 export interface CommonItem {
   id: number,
   name: string,
@@ -11,8 +14,7 @@ export interface CommonItem {
 
 
 const Wrapper = styled.div`
-
-
+  
 `;
 const bankTableTitle = [
   {
@@ -47,8 +49,14 @@ const bankTableTitle = [
   },
 ]
 
-const WorkerSearch = () => {
+const search = () =>{
 
+}
+
+const WorkerSearch = () => {
+  const data = useLoaderData();
+  console.log(data)
+  console.log(111)
   // const user = useRecoilState()
   return (
     <Wrapper>
@@ -112,8 +120,6 @@ const WorkerSearch = () => {
         </Row>
       </Form>
       <Table columns={bankTableTitle}/>
-
-
     </Wrapper>
   );
 };

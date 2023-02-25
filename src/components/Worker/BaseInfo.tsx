@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 `;
 
 
-const WorkerSearch = () => {
+const BaseInfo = () => {
 
   // const user = useRecoilState()
   return (
@@ -205,4 +205,4 @@ const WorkerSearch = () => {
   );
 };
 
-export default WorkerSearch;
+export default BaseInfo;
