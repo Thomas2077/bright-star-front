@@ -80,16 +80,12 @@ const WorkerSearchPage = () => {
   const [{ companySelector }, setCompanyInfo] = useSetState<{ companySelector: TgSetting[] }>({ companySelector: [] });
 
   useAsyncEffect(async () => {
-    const companyInfoList = await getCompanyName({ category1: "1" });
-    setCompanyInfo({ companySelector: companyInfoList });
-
-    const categoryList = await getJobCategory({ category1: "3", category2: "4" });
-    setJobCategory(categoryList);
+    setCompanyInfo({ companySelector: await getCompanyName({ category1: "1" }) });
+    setJobCategory(await getJobCategory({ category1: "3", category2: "4" }));
   }, []);
 
   const submit = async (command: EmployeeQueryCommand)=>{
-    const workerInfo = await getWorkerInfo(command);
-    setTableState(workerInfo)
+    setTableState( await getWorkerInfo(command))
   }
 
   return (

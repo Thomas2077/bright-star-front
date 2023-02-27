@@ -2,7 +2,6 @@ import styled from "styled-components";
 import BaseInfo from "../components/Worker/BaseInfo";
 import { Button, Form, Radio, Table } from "antd";
 import React, { useEffect } from "react";
-import { EmployeeSaveCommand } from "../types/worker";
 import SalaryInfo from "../components/Worker/SalaryInfo";
 import { ContactInfo } from "../components/Worker/ContactInfo";
 
@@ -14,7 +13,6 @@ const WorkerInsertPage = () => {
   const [form] = Form.useForm();
 
   const saveWorker = (props: any) =>{
-    console.log(1)
     console.log(props)
   }
   useEffect(()=>{
@@ -33,9 +31,10 @@ const WorkerInsertPage = () => {
       autoComplete="off"
       labelAlign="right"
     >
-      <BaseInfo />
-      <SalaryInfo />
-      <ContactInfo />
+
+      {/*<BaseInfo />*/}
+      {/*<SalaryInfo />*/}
+      {/*<ContactInfo />*/}
 
       <Form.Item>
         <Button type="primary" htmlType="submit">

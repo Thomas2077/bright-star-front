@@ -3,7 +3,6 @@ import { Button, Form } from "antd";
 import FormItem from "antd/es/form/FormItem";
 
 const Wrapper = styled.div`
-  width: calc(50% - 8px)
 `;
 
 const BussinessExp = () =>{
