@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Button, Col, Form, Input, Radio, Row, Select, Table } from "antd";
+import { Button, Col, Form, Input, Radio, Row, Select, Space, Table } from "antd";
 import styled from "styled-components";
 import FormItem from "antd/es/form/FormItem";
-import { getCompanyName, getJobCategory } from "../../request/settingApi";
+import { getCompanyName, getJobCategory } from "../request/settingApi";
 import { useAsyncEffect, useRequest, useSetState } from "ahooks";
-import { EmployeePreviewInfoVO, EmployeeQueryCommand, TgSetting } from "../../types/tgSetting";
-import { getWorkerInfo } from "../../request/workInfo";
+import { EmployeePreviewInfoVO, EmployeeQueryCommand, TgSetting } from "../types/tgSetting";
+import { getWorkerInfo } from "../request/workInfo";
+import { Link } from "react-router-dom";
 
 export interface CommonItem {
   id: number,
@@ -18,47 +19,67 @@ const Wrapper = styled.div`
 `;
 const bankTableTitle = [
   {
-    title: "金融機関コード",
-    dataIndex: "name",
-    key: "name"
+    title: "所属会社",
+    dataIndex: "companyName",
+    key: "companyName"
   },
   {
-    title: "金融機関名",
-    dataIndex: "age",
-    key: "age"
+    title: "社員名",
+    dataIndex: "workerName",
+    key: "workerName"
   },
   {
-    title: "支店名コード",
-    dataIndex: "address",
-    key: "address"
+    title: "性別",
+    dataIndex: "genderStr",
+    key: "genderStr"
   },
   {
-    title: "支店名",
-    dataIndex: "address",
-    key: "address"
+    title: "職業種類",
+    dataIndex: "jobCategory",
+    key: "jobCategory"
   },
   {
-    title: "口座種類",
-    dataIndex: "address",
-    key: "address"
+    title: "入社日",
+    dataIndex: "onBoardDate",
+    key: "onBoardDate"
   },
   {
-    title: "名義人",
-    dataIndex: "address",
-    key: "address"
+    title: "退社日",
+    dataIndex: "offBoardDate",
+    key: "offBoardDate"
+  },
+  {
+    title: "職務経歴書",
+    dataIndex: "3",
+    key: "3",
+    render:(()=>{return(
+      <Button >
+         登録
+        <Link to = '/index'></Link>
+      </Button>
+    )})
+  },
+  {
+    title: "編集",
+    dataIndex: "2",
+    key: "2",
+    render:(()=>{return(
+      <Space>
+        <Space.Compact>
+          <Button >更新<Link to = '/index'></Link></Button>
+          <Button >削除<Link to = '/index'></Link></Button>
+        </Space.Compact>
+      </Space>
+    )})
   }
 ];
 
-
-const WorkerSearch = () => {
+const WorkerSearchPage = () => {
   const [previewData, setTableState] = useState<EmployeePreviewInfoVO[]>([]);
   const [jobCategoryList, setJobCategory] = useState<TgSetting[]>([]);
-
   const [{ companySelector }, setCompanyInfo] = useSetState<{ companySelector: TgSetting[] }>({ companySelector: [] });
 
-
   useAsyncEffect(async () => {
-
     const companyInfoList = await getCompanyName({ category1: "1" });
     setCompanyInfo({ companySelector: companyInfoList });
 
@@ -67,18 +88,14 @@ const WorkerSearch = () => {
   }, []);
 
   const submit = async (command: EmployeeQueryCommand)=>{
-
     const workerInfo = await getWorkerInfo(command);
-
-    console.log(workerInfo);
+    setTableState(workerInfo)
   }
-
 
   return (
     <Wrapper>
       <Form
         name="basic"
-
         initialValues={{ remember: true }}
         onFinish={submit}
         // onFinishFailed={onFinishFailed}
@@ -103,7 +120,6 @@ const WorkerSearch = () => {
               />
             </FormItem>
           </Col>
-
           <Col span={6}>
             <FormItem
               label="社員名"
@@ -113,6 +129,7 @@ const WorkerSearch = () => {
             </FormItem>
           </Col>
         </Row>
+
         <Row gutter={24}>
           <Col span={6}>
             <FormItem
@@ -128,7 +145,7 @@ const WorkerSearch = () => {
             </FormItem>
           </Col>
           <Col span={6}>
-            <FormItem name="onDuty" initialValue ={true}
+            <FormItem name="onDuty"
               rules={[{ required: true }]}
             >
               <Radio.Group>
@@ -149,9 +166,9 @@ const WorkerSearch = () => {
           </Col>
         </Row>
       </Form>
-      <Table columns={bankTableTitle} />
+      <Table columns={bankTableTitle} dataSource={previewData}/>
     </Wrapper>
   );
 };
 
-export default WorkerSearch;
+export default WorkerSearchPage;

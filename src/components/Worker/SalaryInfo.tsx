@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 
 const Wrapper = styled.div`
-  width: calc(50% - 8px)
 `;
 
 
@@ -23,22 +22,22 @@ const bankTableTitle = [
   {
     title: '支店名コード',
     dataIndex: 'address',
-    key: 'address',
+    key: '1',
   },
   {
     title: '支店名',
     dataIndex: 'address',
-    key: 'address',
+    key: '2',
   },
   {
     title: '口座種類',
     dataIndex: 'address',
-    key: 'address',
+    key: '3',
   },
   {
     title: '名義人',
     dataIndex: 'address',
-    key: 'address',
+    key: '4',
   },
 ]
 
@@ -46,52 +45,52 @@ const salaryRecordTableTitle = [
   {
     title: '適用開始年月',
     dataIndex: 'name',
-    key: 'name',
+    key: '1',
   },
   {
     title: '適用終了年月',
     dataIndex: 'age',
-    key: 'age',
+    key: '2',
   },
   {
     title: '支店名コード',
     dataIndex: 'address',
-    key: 'address',
+    key: '3',
   },
   {
     title: '基本給',
     dataIndex: 'address',
-    key: 'address',
+    key: '4',
   },
   {
     title: '職能給',
     dataIndex: 'address',
-    key: 'address',
+    key: '5',
   },
   {
     title: '雇用保険番号',
     dataIndex: 'address',
-    key: 'address',
+    key: '6',
   },
   {
     title: '年金番号',
     dataIndex: 'address',
-    key: 'address',
+    key: '7',
   },
   {
     title: '年金基準額',
     dataIndex: 'address',
-    key: 'address',
+    key: '8',
   },
   {
     title: '健康保険番号',
     dataIndex: 'address',
-    key: 'address',
+    key: '9',
   },
   {
     title: '備考',
     dataIndex: 'address',
-    key: 'address',
+    key: '10',
 
   },
 
@@ -99,31 +98,17 @@ const salaryRecordTableTitle = [
 
 const SalaryInfo = () => {
   return (
-
     <Wrapper>
-      <h2>基本情報</h2>
-
-      <Form
-        name="basic"
-        initialValues={{ remember: true }}
-        // labelCol={{ span: 8 }}
-        // wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 2000 }}
-        // onFinish={onFinish}
-        // onFinishFailed={onFinishFailed}
-        autoComplete="off"
-        labelAlign="right"
-      >
+      <h2>給与関連情報</h2>
         給与振込口座
         <Form.Item>
           <Table columns={bankTableTitle}/>
         </Form.Item>
 
         給与履歴
-        <Form.Item>
-          <Table columns={salaryRecordTableTitle}/>
-        </Form.Item>
-      </Form>
+      <Form.Item name="SalaryTable" valuePropName="dataSource">
+        <Table  columns={salaryRecordTableTitle}/>
+      </Form.Item>
     </Wrapper>
 
   );

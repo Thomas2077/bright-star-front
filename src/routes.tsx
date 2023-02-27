@@ -1,18 +1,19 @@
 import React from "react";
-import {
-  createBrowserRouter,
-} from "react-router-dom";
-import WorkerSearch from "./components/Worker/WorkerSearch";
+import { createBrowserRouter } from "react-router-dom";
+import WorkerSearchPage from "./pages/WorkerSearchPage";
+import WorkerInsertPage from "./pages/WorkerInsertPage";
 
 const routes = createBrowserRouter([
-    {
-      path: "/v1",
-      // loader: ()=> (getWorkerSearchConfig()),
-      element: <WorkerSearch />,
-    }]
-)
-
-
+  {
+    path: "/worker/search",
+    element: <WorkerSearchPage />
+  },
+  {
+    path:"/worker/insert",
+    element:<WorkerInsertPage/>
+  }
+  ]
+);
 
 
 export default routes;
