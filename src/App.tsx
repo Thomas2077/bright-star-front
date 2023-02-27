@@ -4,12 +4,12 @@ import BaseInfo from "./components/Worker/BaseInfo";
 import SalaryInfo from "./components/Worker/SalaryInfo";
 import { ContactInfo } from "./components/Worker/ContactInfo";
 import SkillExp from "./components/Worker/SkillExperience";
-import router from "./Router";
+import routes from "./routes";
 import { RouterProvider } from "react-router-dom";
 
 const App = () =>{
   return(
-    <RouterProvider router={router}/>
+    <RouterProvider router={routes}/>
   )
 }
 

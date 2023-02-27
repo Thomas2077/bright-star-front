@@ -9,9 +9,28 @@ export type TgSetting = {
   value4?: String,
   value5?: String,
 }
-export type settingParam = {
+export type SettingParam = {
   category1?: string,
   category2?: string,
   category3?: string
+}
+
+export type EmployeeQueryCommand = {
+  companyId?:string,
+  workerName?:string,
+  jobCategoryId?:string,
+  onDuty?:string,
+  syainId?:string,
+
+}
+export type EmployeePreviewInfoVO = {
+  workerId:number,
+  companyName:string,
+  workerName:string,
+  genderStr:string,
+  jobCategoryId:number,
+  jobCategory:string,
+  onBoardDate: string,
+  offBoardDate:string,
 
 }
