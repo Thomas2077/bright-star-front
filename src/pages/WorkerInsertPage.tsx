@@ -32,9 +32,9 @@ const WorkerInsertPage = () => {
       labelAlign="right"
     >
 
-      {/*<BaseInfo />*/}
-      {/*<SalaryInfo />*/}
-      {/*<ContactInfo />*/}
+      <BaseInfo />
+      <SalaryInfo />
+      <ContactInfo />
 
       <Form.Item>
         <Button type="primary" htmlType="submit">
