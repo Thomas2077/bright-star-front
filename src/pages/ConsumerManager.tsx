@@ -3,7 +3,11 @@ import { Button, Form, Input, Select, Space, Table } from "antd";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import FormItem from "antd/es/form/FormItem";
-import { ConsumerType } from "../types/consumer";
+import { ConsumerQueryCommand, ConsumerType, ConsumerWithWorker } from "../types/consumer";
+import { getConsumer } from "../request/consumerApi";
+import { useAsyncEffect, useSetState } from "ahooks";
+import { getCompanyName, getJobCategory } from "../request/settingApi";
+import { TgSetting } from "../types/tgSetting";
 
 const Wrapper = styled.div`
 
@@ -14,7 +18,7 @@ const tableTitle = [
   {
     title: "取引先名",
     dataIndex: "担当者名",
-    key: "companyName"
+    key: "torihikiNameAll"
   },
   {
     title: "担当者名",
@@ -50,13 +54,17 @@ const tableTitle = [
 
 
 const ConsumerManager = () => {
-  const[customerList, setState] = useState<ConsumerType[]>()
-
+  const[customerList, setState] = useState<ConsumerWithWorker[]>()
+  const [{ companySelector }, setCompanyInfo] = useSetState<{ companySelector: TgSetting[] }>({ companySelector: [] });
 
   const [form] = Form.useForm();
-  const submit = (command:any) => {
-    setState([{}])
+  const submit = async (command:ConsumerQueryCommand) => {
+    setState(await getConsumer(command));
   };
+
+  useAsyncEffect(async () => {
+    setCompanyInfo({ companySelector: await getCompanyName({ category1: "1" }) });
+  }, []);
   return (
     <Wrapper>
       <h4>检索条件</h4>
@@ -71,23 +79,27 @@ const ConsumerManager = () => {
         autoComplete="true"
         layout="inline"
       >
-        <FormItem label="取引先名1212" name="cusname" >
+        <FormItem label="取引先名" name="cusname" >
           <Input/>
         </FormItem>
-        <FormItem label="1取引1212先名11111" name="1" >
+        <FormItem label="取引元名" name="1" >
           <Select
             style={{ width: 80, margin: '0 8px' }}
+            options={
+              companySelector.length > 0 ?
+                companySelector.map(item => {
+                  return { value: item.category2, label: item.value1 };
+                }) : []
+            }
           />
         </FormItem>
         <FormItem shouldUpdate>
-          {() => (
             <Button
               type="primary"
               htmlType="submit"
             >
-              Log in
+              検索
             </Button>
-          )}
         </FormItem>
       </Form>
       <h4>检索条件</h4>
