@@ -82,7 +82,7 @@ const ConsumerManager = () => {
         <FormItem label="取引先名" name="cusname" >
           <Input/>
         </FormItem>
-        <FormItem label="取引元名" name="1" >
+        <FormItem label="取引元名" name="test" >
           <Select
             style={{ width: 80, margin: '0 8px' }}
             options={

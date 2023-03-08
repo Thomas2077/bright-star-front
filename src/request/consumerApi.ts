@@ -1,4 +1,4 @@
-import { ConsumerQueryCommand, ConsumerType, ConsumerWithWorker } from "../types/consumer";
+import { ConsumerQueryCommand, ConsumerWithWorker } from "../types/consumer";
 import { toURLParam } from "../utils/utils";
 import request from "../utils/request";
 

@@ -4,6 +4,7 @@ import WorkerSearchPage from "./pages/WorkerSearchPage";
 import WorkerInsertPage from "./pages/WorkerInsertPage";
 import FreelancerPage from "./pages/FreelancerPage";
 import ConsumerManager from "./pages/ConsumerManager";
+import ConsumerInsertPage from "./pages/ConsumerInsertPage";
 
 const routes = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const routes = createBrowserRouter([
   {
     path:"/consumer/manager",
     element:<ConsumerManager/>
+  },
+  {
+    path:"/consumer/insert",
+    element:<ConsumerInsertPage/>
   }
   ]
 );
