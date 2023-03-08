@@ -38,13 +38,20 @@ export type ConsumerType = {
 }
 
 export type TorihikisakiTantou = {
-  firstName : string,
-  lastName : string,
-  mail : string,
-  tel : string,
+  firstName: string,
+  lastName: string,
+  syozoku: string,
+
+  // 役職: 部長など
+  yakusyoku: string,
+
+  mail: string,
+  tel: string,
+
+  bikou: string,
 
 }
 export type  ConsumerWithWorker = {
   consumer: ConsumerType,
-  consumerTantou: ConsumerWithWorker
+  consumerTantouList: TorihikisakiTantou[]
 }
