@@ -3,10 +3,10 @@ import { Button, Form, Input, Select, Space, Table } from "antd";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import FormItem from "antd/es/form/FormItem";
-import { ConsumerQueryCommand, ConsumerType, ConsumerWithWorker } from "../types/consumer";
+import { ConsumerQueryCommand, ConsumerWithWorker } from "../types/consumer";
 import { getConsumer } from "../request/consumerApi";
 import { useAsyncEffect, useSetState } from "ahooks";
-import { getCompanyName, getJobCategory } from "../request/settingApi";
+import { getCompanyName } from "../request/settingApi";
 import { TgSetting } from "../types/tgSetting";
 
 const Wrapper = styled.div`

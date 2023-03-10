@@ -3,7 +3,7 @@ import { Button, Col, Form, Input, Radio, Row, Select, Space, Table } from "antd
 import styled from "styled-components";
 import FormItem from "antd/es/form/FormItem";
 import { getCompanyName, getJobCategory } from "../request/settingApi";
-import { useAsyncEffect, useRequest, useSetState } from "ahooks";
+import { useAsyncEffect, useSetState } from "ahooks";
 import { EmployeePreviewInfoVO, EmployeeQueryCommand, TgSetting } from "../types/tgSetting";
 import { getWorkerInfo } from "../request/workInfo";
 import { Link } from "react-router-dom";
@@ -74,7 +74,7 @@ const bankTableTitle = [
   }
 ];
 
-const WorkerSearchPage = () => {
+const WorkerSearch = () => {
   const [previewData, setTableState] = useState<EmployeePreviewInfoVO[]>([]);
   const [jobCategoryList, setJobCategory] = useState<TgSetting[]>([]);
   const [{ companySelector }, setCompanyInfo] = useSetState<{ companySelector: TgSetting[] }>({ companySelector: [] });
@@ -167,4 +167,4 @@ const WorkerSearchPage = () => {
   );
 };
 
-export default WorkerSearchPage;
+export default WorkerSearch;

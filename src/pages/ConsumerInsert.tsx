@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 
 `;
 
-const ConsumerInsertPage = () => {
+const ConsumerInsert = () => {
 
   const [form] = Form.useForm();
 
@@ -27,7 +27,8 @@ const ConsumerInsertPage = () => {
       }>
         layout="horizontal"
         labelAlign="right"
-        labelCol={{ span: 4 }}
+        labelCol={{ span:4 }}
+        wrapperCol={{ span:8 }}
         submitter={false}
       >
         <ConsumerInfo />
@@ -39,4 +40,4 @@ const ConsumerInsertPage = () => {
   );
 };
 
-export default ConsumerInsertPage;
+export default ConsumerInsert;

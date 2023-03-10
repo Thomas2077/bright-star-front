@@ -1,6 +1,6 @@
 // 関連情報
 import React from "react";
-import { Form, Input, Table } from "antd";
+import { Form, Table } from "antd";
 import styled from "styled-components";
 
 

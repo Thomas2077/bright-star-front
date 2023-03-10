@@ -1,9 +1,10 @@
 export type ConsumerQueryCommand = {
   customerName: string,
-  customerAddress: string
+  customerAddress?: string
 }
 
 export type ConsumerType = {
+  torihikiId: number
   torihikiNameAll: string,
   torihikiNameRyaku: string,
   yuubin: string,
@@ -44,10 +45,8 @@ export type TorihikisakiTantou = {
 
   // 役職: 部長など
   yakusyoku: string,
-
   mail: string,
   tel: string,
-
   bikou: string,
 
 }

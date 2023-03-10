@@ -6,7 +6,6 @@ import { EmployeePreviewInfoVO, EmployeeQueryCommand, TgSetting } from "../types
 import { useAsyncEffect } from "ahooks";
 import { getCompanyName } from "../request/settingApi";
 import { getWorkerInfo } from "../request/workInfo";
-import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
 

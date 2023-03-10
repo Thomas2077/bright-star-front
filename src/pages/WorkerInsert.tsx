@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 
 `;
 
-const WorkerInsertPage = () => {
+const WorkerInsert = () => {
   const [form] = Form.useForm();
 
   const saveWorker = (props: any) => {
@@ -49,4 +49,4 @@ const WorkerInsertPage = () => {
 
 };
 
-export default WorkerInsertPage;
+export default WorkerInsert;

@@ -1,19 +1,20 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import WorkerSearchPage from "./pages/WorkerSearchPage";
-import WorkerInsertPage from "./pages/WorkerInsertPage";
+import WorkerSearch from "./pages/WorkerSearch";
+import WorkerInsert from "./pages/WorkerInsert";
 import FreelancerPage from "./pages/FreelancerPage";
 import ConsumerManager from "./pages/ConsumerManager";
-import ConsumerInsertPage from "./pages/ConsumerInsertPage";
+import ConsumerInsert from "./pages/ConsumerInsert";
+import ConsumerUpdate from "./pages/ConsumerUpdate";
 
 const routes = createBrowserRouter([
   {
     path: "/worker/search",
-    element: <WorkerSearchPage />
+    element: <WorkerSearch />
   },
   {
     path:"/worker/insert",
-    element:<WorkerInsertPage/>
+    element:<WorkerInsert/>
   },
   {
     path:"/worker/freelancer",
@@ -25,7 +26,11 @@ const routes = createBrowserRouter([
   },
   {
     path:"/consumer/insert",
-    element:<ConsumerInsertPage/>
+    element:<ConsumerInsert/>
+  },
+  {
+    path:"/consumer/update",
+    element:<ConsumerUpdate/>
   }
   ]
 );
