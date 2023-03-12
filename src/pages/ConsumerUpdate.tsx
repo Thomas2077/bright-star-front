@@ -17,7 +17,6 @@ const ConsumerUpdate = () => {
 
   const [form] = Form.useForm();
 
-
   const submit = (values: ConsumerType) => {
     console.log(values);
   };

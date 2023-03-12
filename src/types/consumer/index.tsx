@@ -39,6 +39,7 @@ export type ConsumerType = {
 }
 
 export type TorihikisakiTantou = {
+  tantouId : number,
   firstName: string,
   lastName: string,
   syozoku: string,

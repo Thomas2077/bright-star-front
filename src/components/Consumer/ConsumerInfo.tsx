@@ -7,7 +7,6 @@ import { ProFormRadio, ProFormText } from "@ant-design/pro-form";
 import { Button, Checkbox, Select } from "antd";
 import CompanySelector from "../CompanySelector/CompmaySelector";
 import TantouTable from "./TantouTable";
-import { ConsumerWithWorker } from "../../types/consumer";
 
 const Wrapper = styled.div`
 

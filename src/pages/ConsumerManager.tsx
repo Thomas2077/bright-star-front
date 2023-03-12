@@ -3,7 +3,7 @@ import { Button, Form, Input, Select, Space, Table } from "antd";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import FormItem from "antd/es/form/FormItem";
-import { ConsumerQueryCommand, ConsumerWithWorker } from "../types/consumer";
+import { ConsumerQueryCommand } from "../types/consumer";
 import { getConsumer } from "../request/consumerApi";
 import { useAsyncEffect, useSetState } from "ahooks";
 import { getCompanyName } from "../request/settingApi";
@@ -14,37 +14,38 @@ const Wrapper = styled.div`
 
 `;
 
+
 const tableTitle = [
   {
     title: "取引先名",
-    dataIndex: "担当者名",
+    dataIndex: "torihikiNameAll",
     key: "torihikiNameAll"
   },
   {
     title: "担当者名",
-    dataIndex: "companyName",
-    key: "companyName"
+    dataIndex: "tantouName",
+    key: "tantouName"
   },
   {
     title: "担当者Mail",
-    dataIndex: "companyName",
-    key: "companyName"
+    dataIndex: "tantouMail",
+    key: "tantouMail"
   },
   {
     title: "担当者Tel",
-    dataIndex: "companyName",
-    key: "companyName"
+    dataIndex: "tantouTel",
+    key: "tantouTel"
   },
   {
     title: "編集",
-    dataIndex: "companyName",
-    key: "companyName",
-    render: (() => {
+    dataIndex: "torihikiId",
+    key: "torihikiId",
+    render: ((_: any, record: TableData) => {
       return (
         <Space>
           <Space.Compact>
-            <Button>更新<Link to="/index"></Link></Button>
-            <Button>削除<Link to="/index"></Link></Button>
+            <Button><Link to="/consumer/update">更新</Link></Button>
+            <Button onClick={() => deleteTorihiki(record)}>削除</Button>
           </Space.Compact>
         </Space>
       );
@@ -52,14 +53,40 @@ const tableTitle = [
   }
 ];
 
+type TableData = {
+  torihikiId: number,
+  torihikiNameAll: string,
+  tantouName: string,
+  tantouMail: string,
+  tantouTel: string
+}
+
+const deleteTorihiki = (record: TableData) => {
+
+  console.log(record.torihikiId)
+
+};
+
 
 const ConsumerManager = () => {
-  const[customerList, setState] = useState<ConsumerWithWorker[]>()
-  const [{ companySelector }, setCompanyInfo] = useSetState<{ companySelector: TgSetting[] }>({ companySelector: [] });
 
+  const [customerList, setState] = useState<TableData[]>();
+  const [{ companySelector }, setCompanyInfo] = useSetState<{ companySelector: TgSetting[] }>({ companySelector: [] });
   const [form] = Form.useForm();
-  const submit = async (command:ConsumerQueryCommand) => {
-    setState(await getConsumer(command));
+
+
+  const submit = async (command: ConsumerQueryCommand) => {
+    const consumerWithWorkers = await getConsumer(command);
+    const res: TableData[] = consumerWithWorkers.map(item => {
+      return {
+        torihikiId: item.consumer.torihikiId,
+        torihikiNameAll: item.consumer.torihikiNameAll,
+        tantouName: `${item.consumerTantouList[0]?.firstName ?? ""} ${item.consumerTantouList[0]?.lastName ?? ""}`,
+        tantouMail: item.consumerTantouList[0]?.mail,
+        tantouTel: item.consumerTantouList[0]?.tel
+      };
+    });
+    setState(res);
   };
 
   useAsyncEffect(async () => {
@@ -72,19 +99,20 @@ const ConsumerManager = () => {
         form={form}
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
-        style={{width:1000}}
+        style={{ width: 1000 }}
         name="basic"
         onFinish={submit}
         initialValues={{ remember: true }}
         autoComplete="true"
         layout="inline"
       >
-        <FormItem label="取引先名" name="cusname" >
-          <Input/>
+        <FormItem label="取引先名" name="consumerName">
+          <Input />
         </FormItem>
-        <FormItem label="取引元名" name="test" >
+        <FormItem label="取引元名" name="consumerAddress">
           <Select
-            style={{ width: 80, margin: '0 8px' }}
+
+            style={{ width: 80, margin: "0 8px" }}
             options={
               companySelector.length > 0 ?
                 companySelector.map(item => {
@@ -94,16 +122,17 @@ const ConsumerManager = () => {
           />
         </FormItem>
         <FormItem shouldUpdate>
-            <Button
-              type="primary"
-              htmlType="submit"
-            >
-              検索
-            </Button>
+          <Button
+            type="primary"
+            htmlType="submit"
+          >
+            検索
+          </Button>
         </FormItem>
       </Form>
       <h4>检索条件</h4>
       <Table
+        rowKey="torihikiId"
         columns={tableTitle}
         dataSource={customerList}
       />

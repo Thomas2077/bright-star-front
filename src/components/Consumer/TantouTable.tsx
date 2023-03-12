@@ -1,22 +1,20 @@
 import styled from "styled-components";
 import { ProColumns, ProTable } from "@ant-design/pro-table";
-import { ConsumerType, TorihikisakiTantou } from "../../types/consumer";
+import { TorihikisakiTantou } from "../../types/consumer";
 import { Button } from "antd";
 import React, { useState } from "react";
-import { SettingParam } from "../../types/tgSetting";
 import { useAsyncEffect } from "ahooks";
-import { getCompanyName } from "../../request/settingApi";
 import { getTantou } from "../../request/consumerApi";
 
 const Wrapper = styled.div`
 
 `;
 const columns: ProColumns<TorihikisakiTantou>[] = [
-  // {
-  //   dataIndex: "index",
-  //   valueType: "indexBorder",
-  //   width: 48
-  // },
+  {
+    dataIndex: "torihikiId",
+    valueType: "indexBorder",
+    width: 48
+  },
   {
     dataIndex: "To",
     title: "To"
@@ -76,7 +74,8 @@ const columns: ProColumns<TorihikisakiTantou>[] = [
 const TantouTable = () =>{
   const[tanTouList, setTantouState] = useState<TorihikisakiTantou[]>()
   useAsyncEffect(async () => {
-    setTantouState(await getTantou(0));
+    const t =  await getTantou(0)
+    setTantouState([...t]);
   },[])
 
 
@@ -86,8 +85,9 @@ const TantouTable = () =>{
       <ProTable<TorihikisakiTantou>
         style={{ width: 1000 }}
         columns={columns}
-        dataSource={tanTouList }
+        dataSource={tanTouList}
         cardBordered
+        rowKey={columns=>columns.tantouId}
         toolbar={{
           actions: [
             <Button
