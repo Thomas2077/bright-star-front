@@ -2,11 +2,12 @@ import styled from "styled-components";
 import { Form, Input } from "antd";
 import { ProForm } from "@ant-design/pro-form";
 import ConsumerInfo from "../components/Consumer/ConsumerInfo";
-import React from "react";
-import { ConsumerType } from "../types/consumer";
+import React, { useState } from "react";
+import { ConsumerType, ConsumerWithWorker } from "../types/consumer";
 import Search from "antd/es/input/Search";
 import FormItem from "antd/es/form/FormItem";
 import { getConsumer } from "../request/consumerApi";
+import { useAsyncEffect, useSetState } from "ahooks";
 
 const Wrapper = styled.div`
 
@@ -15,18 +16,25 @@ const Wrapper = styled.div`
 
 const ConsumerUpdate = () => {
 
+  useAsyncEffect(async () => {
+
+  },[])
+
+  const [consumerAndWorker, setConsumerAndWorker] = useState<ConsumerWithWorker>();
   const [form] = Form.useForm();
 
   const submit = (values: ConsumerType) => {
     console.log(values);
   };
-  const onSearch = (value: string) => {
-    console.log(value);
-    getConsumer({customerName: value}).then((e) => console.log(e))
+
+
+  const onSearch = async (value: string) => {
+    // setConsumerAndWorker((await getConsumer({ consumerName: value })).pop);
+
   };
+
   return (
     <Wrapper>
-
       <ProForm<ConsumerType>
         layout="horizontal"
         labelAlign="right"

@@ -1,6 +1,6 @@
 export type ConsumerQueryCommand = {
-  customerName: string,
-  customerAddress?: string
+  consumerName: string,
+  consumerAddress?: string
 }
 
 export type ConsumerType = {

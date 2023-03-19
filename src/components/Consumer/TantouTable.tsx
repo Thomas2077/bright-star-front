@@ -72,11 +72,13 @@ const columns: ProColumns<TorihikisakiTantou>[] = [
 ];
 
 const TantouTable = () =>{
+
   const[tanTouList, setTantouState] = useState<TorihikisakiTantou[]>()
   useAsyncEffect(async () => {
     const t =  await getTantou(0)
     setTantouState([...t]);
   },[])
+
 
 
   return(
