@@ -10,7 +10,7 @@ export async function getCompanyName(params?: SettingParam) {
 
 export async function getJobCategory(params?: SettingParam) {
   const queryString = new URLSearchParams(params).toString();
-  return request.get<any, TgSetting[]>(`/v1/settings?${queryString}`, {}).then(res =>(res));
+  return request.get<any, TgSetting[]>(`/v1/settings?${queryString}`, {});
 }
 
 

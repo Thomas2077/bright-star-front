@@ -1,13 +1,16 @@
 import styled from "styled-components";
-import { Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 import { ProForm } from "@ant-design/pro-form";
 import ConsumerInfo from "../components/Consumer/ConsumerInfo";
-import React, { useState } from "react";
-import { ConsumerType, ConsumerWithWorker } from "../types/consumer";
+import React from "react";
+import { ConsumerType, ConsumerWithWorker, Parm, recoilState } from "../types/consumer";
 import Search from "antd/es/input/Search";
 import FormItem from "antd/es/form/FormItem";
-import { getConsumer } from "../request/consumerApi";
+import { getConsumer, getTantou } from "../request/consumerApi";
 import { useAsyncEffect, useSetState } from "ahooks";
+import { useParams } from "react-router-dom";
+import TantouTable from "../components/Consumer/TantouTable";
+import { useRecoilState } from "recoil";
 
 const Wrapper = styled.div`
 
@@ -15,22 +18,30 @@ const Wrapper = styled.div`
 `;
 
 const ConsumerUpdate = () => {
-
-  useAsyncEffect(async () => {
-
-  },[])
-
-  const [consumerAndWorker, setConsumerAndWorker] = useState<ConsumerWithWorker>();
+  const { name } = useParams();
+  const [consumerAndWorkerList, setConsumerAndWorkerState] = useSetState<ConsumerWithWorker[]>([]);
+  const [appState, setAppState] = useRecoilState<Parm>(recoilState);
   const [form] = Form.useForm();
 
-  const submit = (values: ConsumerType) => {
+  useAsyncEffect(async () => {
+    setConsumerAndWorkerState((await getConsumer({ consumerName: name })));
+    form.setFieldsValue((await getConsumer({ consumerName: name }))[0].consumer);
+    setAppState({ list: await getTantou(0) });
+  }, []);
+
+
+  const submit = async (values: ConsumerType) => {
     console.log(values);
+    setConsumerAndWorkerState((await getConsumer({ consumerName: name })));
+    setAppState({ list: await getTantou(0) });
   };
 
 
   const onSearch = async (value: string) => {
-    // setConsumerAndWorker((await getConsumer({ consumerName: value })).pop);
+    const consumerWithWorkers = await getConsumer({ consumerName: name });
 
+    console.log(consumerWithWorkers[0]);
+    setConsumerAndWorkerState(consumerWithWorkers);
   };
 
   return (
@@ -44,9 +55,11 @@ const ConsumerUpdate = () => {
         onFinish={async (values: ConsumerType) => {
           return submit(values);
         }}
+        form={form}
       >
 
-        <FormItem label="取引先ID" name="torihikiId" wrapperCol={{ span: 4 }}>
+        <FormItem label="取引先ID" name="torihikiId"
+                  wrapperCol={{ span: 4 }}>
           <Input readOnly />
         </FormItem>
 
@@ -59,8 +72,12 @@ const ConsumerUpdate = () => {
             style={{ width: 304 }}
           />
         </FormItem>
+        <TantouTable />
 
         <ConsumerInfo />
+        <FormItem>
+          <Button type="primary" htmlType="submit">登 録</Button>
+        </FormItem>
       </ProForm>
     </Wrapper>
 

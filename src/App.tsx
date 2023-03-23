@@ -1,9 +1,12 @@
 import routes from "./routes";
 import { RouterProvider } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 
 const App = () =>{
   return(
-    <RouterProvider router={routes}/>
+    <RecoilRoot>
+      <RouterProvider router={routes}/>
+    </RecoilRoot>
   )
 }
 

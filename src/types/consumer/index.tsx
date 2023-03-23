@@ -1,5 +1,8 @@
+import { extend } from "dayjs";
+import { atom, RecoilState } from "recoil";
+
 export type ConsumerQueryCommand = {
-  consumerName: string,
+  consumerName: any,
   consumerAddress?: string
 }
 
@@ -55,3 +58,17 @@ export type  ConsumerWithWorker = {
   consumer: ConsumerType,
   consumerTantouList: TorihikisakiTantou[]
 }
+
+export type Parm = {
+  list: TorihikisakiTantou[]
+}
+const init=()=>{
+  const res : Parm = {
+    list:[],
+  }
+  return res
+}
+export const recoilState: RecoilState<Parm> = atom({
+  default: init(),
+  key: 'parm',
+})

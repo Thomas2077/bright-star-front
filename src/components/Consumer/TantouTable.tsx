@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { ProColumns, ProTable } from "@ant-design/pro-table";
-import { TorihikisakiTantou } from "../../types/consumer";
+import { ConsumerWithWorker, Parm, recoilState, TorihikisakiTantou } from "../../types/consumer";
 import { Button } from "antd";
-import React, { useState } from "react";
-import { useAsyncEffect } from "ahooks";
+import React, { forwardRef, Ref, useImperativeHandle, useState } from "react";
+import { useAsyncEffect, useControllableValue } from "ahooks";
 import { getTantou } from "../../request/consumerApi";
+import { useRecoilState } from "recoil";
 
 const Wrapper = styled.div`
 
@@ -73,11 +74,20 @@ const columns: ProColumns<TorihikisakiTantou>[] = [
 
 const TantouTable = () =>{
 
-  const[tanTouList, setTantouState] = useState<TorihikisakiTantou[]>()
-  useAsyncEffect(async () => {
-    const t =  await getTantou(0)
-    setTantouState([...t]);
-  },[])
+  // const[tanTouList, setTantouState] = useControllableValue<TorihikisakiTantou[]>(props.list)
+  // useAsyncEffect(async () => {
+  //   // const t =  await getTantou(1)
+  //   setTantouState(props.list);
+  //   console.log("save", tanTouList)
+  //
+  // },[])
+  const [appState, setAppState] = useRecoilState<Parm>(recoilState)
+  const save = () => {
+    console.log("save")
+  }
+  console.log("save1", appState)
+
+
 
 
 
@@ -87,7 +97,7 @@ const TantouTable = () =>{
       <ProTable<TorihikisakiTantou>
         style={{ width: 1000 }}
         columns={columns}
-        dataSource={tanTouList}
+        dataSource={appState.list}
         cardBordered
         rowKey={columns=>columns.tantouId}
         toolbar={{

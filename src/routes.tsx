@@ -8,30 +8,30 @@ import ConsumerInsert from "./pages/ConsumerInsert";
 import ConsumerUpdate from "./pages/ConsumerUpdate";
 
 const routes = createBrowserRouter([
-  {
-    path: "/worker/search",
-    element: <WorkerSearch />
-  },
-  {
-    path:"/worker/insert",
-    element:<WorkerInsert/>
-  },
-  {
-    path:"/worker/freelancer",
-    element:<FreelancerPage/>
-  },
-  {
-    path:"/consumer/manager",
-    element:<ConsumerManager/>
-  },
-  {
-    path:"/consumer/insert",
-    element:<ConsumerInsert/>
-  },
-  {
-    path:"/consumer/update",
-    element:<ConsumerUpdate/>
-  }
+    {
+      path: "/worker/search",
+      element: <WorkerSearch />
+    },
+    {
+      path: "/worker/insert",
+      element: <WorkerInsert />
+    },
+    {
+      path: "/worker/freelancer",
+      element: <FreelancerPage />
+    },
+    {
+      path: "/consumer/manager",
+      element: <ConsumerManager />
+    },
+    {
+      path: "/consumer/insert",
+      element: <ConsumerInsert />
+    },
+    {
+      path: "/consumer/update/:name",
+      element: <ConsumerUpdate />
+    }
   ]
 );
 

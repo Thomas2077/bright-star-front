@@ -19,9 +19,9 @@ const ConsumerInfo = () => {
     <Wrapper>
       <h2>取引先登録</h2>
 
-      <FormItem label="取引先名（全名）" name="torihikiNameAll" wrapperCol={{ span: 4 }}>
-        <Input />
-      </FormItem>
+      {/*<FormItem label="取引先名（全名）" name="torihikiNameAll"  wrapperCol={{ span: 4 }}>*/}
+      {/*  <Input />*/}
+      {/*</FormItem>*/}
 
       <FormItem label="会社名（略名）" name="torihikiNameRyaku" wrapperCol={{ span: 4 }}>
         <Input />
@@ -68,7 +68,7 @@ const ConsumerInfo = () => {
 
       <h2>振込先情報</h2>
 
-      <TantouTable />
+
 
       <h2>請求設定</h2>
       <FormItem>
@@ -114,9 +114,7 @@ const ConsumerInfo = () => {
 
       <CompanySelector />
 
-      <FormItem>
-        <Button type="primary" htmlType="submit">登 録</Button>
-      </FormItem>
+
     </Wrapper>
   );
 
