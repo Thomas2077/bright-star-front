@@ -59,16 +59,16 @@ export type  ConsumerWithWorker = {
   consumerTantouList: TorihikisakiTantou[]
 }
 
-export type Parm = {
+export type TantouList = {
   list: TorihikisakiTantou[]
 }
 const init=()=>{
-  const res : Parm = {
+  const res : TantouList = {
     list:[],
   }
   return res
 }
-export const recoilState: RecoilState<Parm> = atom({
+export const tantouListState: RecoilState<TantouList> = atom({
   default: init(),
   key: 'parm',
 })

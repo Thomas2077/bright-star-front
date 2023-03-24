@@ -3,7 +3,7 @@ import { Button, Form, Input } from "antd";
 import { ProForm } from "@ant-design/pro-form";
 import ConsumerInfo from "../components/Consumer/ConsumerInfo";
 import React from "react";
-import { ConsumerType, ConsumerWithWorker, Parm, recoilState } from "../types/consumer";
+import { ConsumerType, ConsumerWithWorker, TantouList, tantouListState } from "../types/consumer";
 import Search from "antd/es/input/Search";
 import FormItem from "antd/es/form/FormItem";
 import { getConsumer, getTantou } from "../request/consumerApi";
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 const ConsumerUpdate = () => {
   const { name } = useParams();
   const [consumerAndWorkerList, setConsumerAndWorkerState] = useSetState<ConsumerWithWorker[]>([]);
-  const [appState, setAppState] = useRecoilState<Parm>(recoilState);
+  const [appState, setAppState] = useRecoilState<TantouList>(tantouListState);
   const [form] = Form.useForm();
 
   useAsyncEffect(async () => {
@@ -42,6 +42,8 @@ const ConsumerUpdate = () => {
 
     console.log(consumerWithWorkers[0]);
     setConsumerAndWorkerState(consumerWithWorkers);
+    setAppState({ list: await getTantou(0) });
+
   };
 
   return (
