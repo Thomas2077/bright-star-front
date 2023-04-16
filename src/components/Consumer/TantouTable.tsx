@@ -1,13 +1,11 @@
 import styled from "styled-components";
-import { ProColumns, ProTable } from "@ant-design/pro-table";
-import {
-  TantouList,
-  tantouListState,
-  TorihikisakiTantou
-} from "../../types/consumer";
-import { Button } from "antd";
-import React from "react";
+import { ActionType, EditableFormInstance, EditableProTable, ProColumns } from "@ant-design/pro-table";
+import { TantouList, tantouListState, TorihikisakiTantou } from "../../types/consumer";
+import { Form } from "antd";
+import React, { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
+import { useAsyncEffect } from "ahooks";
+import { ProFormInstance } from "@ant-design/pro-form";
 
 const Wrapper = styled.div`
 
@@ -74,44 +72,55 @@ const columns: ProColumns<TorihikisakiTantou>[] = [
 
 ];
 
-const TantouTable = () =>{
 
-  const [tantouList, setTantouList] = useRecoilState<TantouList>(tantouListState)
+const TantouTable = () => {
 
-  return(
+  const [tantouList, setTantouList] = useRecoilState<TantouList>(tantouListState);
+  const [position, setPosition] = useState<"top" | "bottom" | "hidden">("bottom");
+
+  const actionRef = useRef<ActionType>();
+  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
+  const formRef = useRef<ProFormInstance<any>>();
+  const [form] = Form.useForm();
+  const editableFormRef = useRef<EditableFormInstance>();
+  const [dataSource, setDataSource] = useState<readonly TorihikisakiTantou[]>([]);
+
+  useAsyncEffect(async () => {
+    setDataSource(tantouList.list);
+  }, []);
+  let i = 0;
+
+  return (
     <Wrapper>
+
       <h2>総務担当者情報</h2>
-      <ProTable<TorihikisakiTantou>
+
+      <EditableProTable<TorihikisakiTantou>
         style={{ width: 1000 }}
-        columns={columns}
-        dataSource={tantouList.list}
-        cardBordered
-        rowKey={columns=>columns.tantouId}
-        toolbar={{
-          actions: [
-            <Button
-              key="primary"
-              type="primary"
-              onClick={() => {
-                alert("add");
-              }}
-            >
-              新規行追加
-            </Button>,
-            <Button
-              key="primary"
-              type="primary"
-              onClick={() => {
-                alert("add");
-              }}
-            >
-              最後行削除
-            </Button>
-          ]
+        rowKey="id"
+        scroll={{
+          x: true
         }}
-        search={false}
+        editableFormRef={editableFormRef}
+        actionRef={actionRef}
+        maxLength={10}
+        name="table"
+        columns={columns}
+
+        recordCreatorProps={{
+          record: (index) => {
+            return { id: index + 1 };
+          }
+        }}
+        editable={{
+          type: "multiple",
+          editableKeys,
+          onChange: setEditableRowKeys
+        }}
+        value={tantouList.list}
+        onChange={setDataSource}
       />
     </Wrapper>
-  )
-}
+  );
+};
 export default TantouTable;

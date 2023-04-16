@@ -6,6 +6,7 @@ import FreelancerPage from "./pages/FreelancerPage";
 import ConsumerManager from "./pages/ConsumerManager";
 import ConsumerInsert from "./pages/ConsumerInsert";
 import ConsumerUpdate from "./pages/ConsumerUpdate";
+import TABLE from "./components/Consumer/test";
 
 const routes = createBrowserRouter([
     {
@@ -31,6 +32,7 @@ const routes = createBrowserRouter([
     {
       path: "/consumer/update/:name",
       element: <ConsumerUpdate />
+      // element: <TABLE />
     }
   ]
 );

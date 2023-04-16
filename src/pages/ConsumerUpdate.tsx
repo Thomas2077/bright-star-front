@@ -26,23 +26,20 @@ const ConsumerUpdate = () => {
   useAsyncEffect(async () => {
     setConsumerAndWorkerState((await getConsumer({ consumerName: name })));
     form.setFieldsValue((await getConsumer({ consumerName: name }))[0].consumer);
+
+    // update table
     setAppState({ list: await getTantou(0) });
   }, []);
 
-
   const submit = async (values: ConsumerType) => {
-    console.log(values);
-    setConsumerAndWorkerState((await getConsumer({ consumerName: name })));
-    setAppState({ list: await getTantou(0) });
+    console.log(form.getFieldsValue());
+
+    console.log(values)
   };
 
-
   const onSearch = async (value: string) => {
-    const consumerWithWorkers = await getConsumer({ consumerName: name });
-
-    console.log(consumerWithWorkers[0]);
-    setConsumerAndWorkerState(consumerWithWorkers);
-    setAppState({ list: await getTantou(0) });
+    console.log(form.getFieldValue("table"));;
+    console.log(form.getFieldsValue());
 
   };
 
@@ -74,6 +71,7 @@ const ConsumerUpdate = () => {
             style={{ width: 304 }}
           />
         </FormItem>
+
         <TantouTable />
 
         <ConsumerInfo />

@@ -42,16 +42,17 @@ export type ConsumerType = {
 }
 
 export type TorihikisakiTantou = {
-  tantouId : number,
-  firstName: string,
-  lastName: string,
-  syozoku: string,
+  id : number,
+  tantouId ?: number,
+  firstName?: string,
+  lastName?: string,
+  syozoku?: string,
 
   // 役職: 部長など
-  yakusyoku: string,
-  mail: string,
-  tel: string,
-  bikou: string,
+  yakusyoku?: string,
+  mail?: string,
+  tel?: string,
+  bikou?: string,
 
 }
 export type  ConsumerWithWorker = {
@@ -70,5 +71,5 @@ const init=()=>{
 }
 export const tantouListState: RecoilState<TantouList> = atom({
   default: init(),
-  key: 'parm',
+  key: 'id',
 })
