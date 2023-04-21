@@ -6,7 +6,7 @@ import React from "react";
 import { ConsumerType, ConsumerWithWorker, TantouList, tantouListState } from "../types/consumer";
 import Search from "antd/es/input/Search";
 import FormItem from "antd/es/form/FormItem";
-import { getConsumer, getTantou } from "../request/consumerApi";
+import { getConsumer, getConsumerById, getTantou } from "../request/consumerApi";
 import { useAsyncEffect, useSetState } from "ahooks";
 import { useParams } from "react-router-dom";
 import TantouTable from "../components/Consumer/TantouTable";
@@ -18,14 +18,15 @@ const Wrapper = styled.div`
 `;
 
 const ConsumerUpdate = () => {
-  const { name } = useParams();
+  const { id } = useParams();
   const [consumerAndWorkerList, setConsumerAndWorkerState] = useSetState<ConsumerWithWorker[]>([]);
   const [appState, setAppState] = useRecoilState<TantouList>(tantouListState);
   const [form] = Form.useForm();
 
   useAsyncEffect(async () => {
-    setConsumerAndWorkerState((await getConsumer({ consumerName: name })));
-    form.setFieldsValue((await getConsumer({ consumerName: name }))[0].consumer);
+    setConsumerAndWorkerState((await getConsumerById( id )));
+    // setConsumerAndWorkerState((await getConsumer({ consumerName: name })));
+    // form.setFieldsValue((await getConsumer({ consumerName: name }))[0].consumer);
 
     // update table
     setAppState({ list: await getTantou(0) });

@@ -30,7 +30,7 @@ const routes = createBrowserRouter([
       element: <ConsumerInsert />
     },
     {
-      path: "/consumer/update/:name",
+      path: "/consumer/update/:id",
       element: <ConsumerUpdate />
       // element: <TABLE />
     }
